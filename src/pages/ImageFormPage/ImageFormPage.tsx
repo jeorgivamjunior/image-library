@@ -28,9 +28,15 @@ export const ImageFormPage: ImageFormPageProps = ({ children }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const { control, handleSubmit, reset, setValue } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      id: uuidv4(),
+      id: '',
       title: '',
       description: '',
       dataUrl: '',
@@ -38,12 +44,17 @@ export const ImageFormPage: ImageFormPageProps = ({ children }) => {
   });
 
   const onSubmit = (image: ImageProps): void => {
-    handleAddImage(image);
-    reset();
+    handleAddImage({ ...image, id: uuidv4() });
+    handleClose();
   };
 
   const handleImageChanges = (dataUrl: string): void => {
     setValue('dataUrl', dataUrl);
+  };
+
+  const handleClose = (): void => {
+    reset();
+    closeModal();
   };
 
   return (
@@ -55,7 +66,7 @@ export const ImageFormPage: ImageFormPageProps = ({ children }) => {
         fullScreen={fullScreen}
         TransitionComponent={Transition}
         open={isOpen}
-        onClose={closeModal}
+        onClose={handleClose}
       >
         <form onSubmit={handleSubmit(onSubmit) as () => void}>
           <DialogTitle color="primary">Add new image</DialogTitle>
@@ -65,19 +76,25 @@ export const ImageFormPage: ImageFormPageProps = ({ children }) => {
             <Controller
               name="title"
               control={control}
+              rules={{ required: 'Please enter a title' }}
               render={({ field }) => (
-                <TextField
-                  label="Title"
-                  fullWidth
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  variant="outlined"
-                  margin="normal"
-                  {...field}
-                />
+                <>
+                  <TextField
+                    label="Title *"
+                    fullWidth
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                    margin="normal"
+                    error={!!errors.title}
+                    helperText={errors?.title?.message}
+                    {...field}
+                  />
+                </>
               )}
             />
+
             <Controller
               name="description"
               control={control}
@@ -98,8 +115,8 @@ export const ImageFormPage: ImageFormPageProps = ({ children }) => {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={closeModal}>Cancel</Button>
-            <Button type="submit" onClick={closeModal} autoFocus>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button type="submit" autoFocus>
               Save
             </Button>
           </DialogActions>
