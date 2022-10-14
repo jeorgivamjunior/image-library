@@ -9,8 +9,8 @@ Web application that lists vehicle images.
 - [✅] Add image (image file, title, description)
 - [✅] View a list images (5 images per page)
 - [✅] Search image by title
-- [ ] Edit title and description
-- [ ] Delete a image
+- [✅] Edit title and description
+- [✅] Delete a image
 - [ ] Testing
 
 ## Depedencies

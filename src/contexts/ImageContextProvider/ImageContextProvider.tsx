@@ -8,10 +8,7 @@ import { ImageContextProps, MessageProps } from './types';
 export const ImageContext = createContext<ImageContextProps>({} as any);
 
 export const ImageContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [imageList, setImageList] = useState<ImageProps[]>([
-    { id: 1, title: 'test', description: 'oiefoiwefhjiowe' },
-    { id: 2, title: 'image', description: '3333' },
-  ] as any);
+  const [imageList, setImageList] = useState<ImageProps[]>([]);
 
   const [message, setMessage] = useState<MessageProps>({
     isOpen: false,
