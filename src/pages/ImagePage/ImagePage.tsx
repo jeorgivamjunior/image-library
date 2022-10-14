@@ -4,6 +4,7 @@ import { Container, Paper, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 
 import { ImageFormPage } from '../ImageFormPage';
+import { GridList } from './components';
 
 export const ImagePage: FC = () => {
   return (
@@ -21,7 +22,7 @@ export const ImagePage: FC = () => {
             </ImageFormPage>
           </Grid>
         </Grid>
-        List of images
+        <GridList />
       </Container>
     </Paper>
   );
