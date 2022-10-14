@@ -2,13 +2,24 @@ import { FC, useContext } from 'react';
 
 import { Container, Paper, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
+import { GridRowId, GridRowModel } from '@mui/x-data-grid';
 
 import { ImageContext } from '../../contexts';
+import { ImageProps } from '../../types';
 import { ImageFormPage } from '../ImageFormPage';
 import { GridList } from './components';
 
 export const ImagePage: FC = () => {
-  const { imageList } = useContext(ImageContext);
+  const { imageList, handleEditImage, handleDeleteImage } = useContext(ImageContext);
+
+  const handleRowUpdate = (newRow: GridRowModel): GridRowModel => {
+    handleEditImage(newRow as ImageProps);
+    return newRow;
+  };
+
+  const handleRowDelete = (id: GridRowId): void => {
+    handleDeleteImage(id);
+  };
 
   return (
     <Paper elevation={3}>
@@ -25,7 +36,7 @@ export const ImagePage: FC = () => {
             </ImageFormPage>
           </Grid>
         </Grid>
-        <GridList imageList={imageList} />
+        <GridList imageList={imageList} handleRowUpdate={handleRowUpdate} handleRowDelete={handleRowDelete} />
       </Container>
     </Paper>
   );

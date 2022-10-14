@@ -1,12 +1,56 @@
 import { FC } from 'react';
 
-import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
-import { IconButton } from '@mui/material';
+import CancelIcon from '@mui/icons-material/Close';
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import EditIcon from '@mui/icons-material/Edit';
+import SaveIcon from '@mui/icons-material/Save';
+import { GridRowModes, GridActionsCellItem, GridRowId } from '@mui/x-data-grid';
 
-export const ActionGridCell: FC = ({ row }: any) => {
+import { ActionGridCellProps } from './types';
+
+export const ActionGridCell: FC<ActionGridCellProps> = ({
+  id,
+  modesModel,
+  handleRowDelete,
+  handleModesModelChanges,
+}) => {
+  const isInEditMode = modesModel[id]?.mode === GridRowModes.Edit;
+
+  const handleEditClick = (id: GridRowId): void =>
+    handleModesModelChanges({ ...modesModel, [id]: { mode: GridRowModes.Edit } });
+
+  const handleSaveClick = (id: GridRowId): void =>
+    handleModesModelChanges({ ...modesModel, [id]: { mode: GridRowModes.View } });
+
+  const handleCancelClick = (id: GridRowId): void =>
+    handleModesModelChanges({
+      ...modesModel,
+      [id]: { mode: GridRowModes.View, ignoreModifications: true },
+    });
+
   return (
-    <IconButton aria-label="View" color="success">
-      <VisibilityRoundedIcon />
-    </IconButton>
+    <>
+      {isInEditMode ? (
+        <>
+          <GridActionsCellItem icon={<SaveIcon />} label="Save" onClick={() => handleSaveClick(id)} />,
+          <GridActionsCellItem
+            icon={<CancelIcon />}
+            label="Cancel"
+            className="textPrimary"
+            onClick={() => handleCancelClick(id)}
+          />
+        </>
+      ) : (
+        <>
+          <GridActionsCellItem
+            icon={<EditIcon />}
+            label="Edit"
+            className="textPrimary"
+            onClick={() => handleEditClick(id)}
+          />
+          <GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={() => handleRowDelete(id)} />
+        </>
+      )}
+    </>
   );
 };
