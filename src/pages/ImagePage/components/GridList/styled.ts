@@ -7,7 +7,7 @@ export const GridContainer = styled('div')`
   padding-bottom: 20px;
 
   .MuiDataGrid-columnHeaders {
-    background-color: #fc6e51;
-    color: #fff;
+    background-color: ${({ theme }) => theme.palette.primary.main};
+    color: ${({ theme }) => theme.palette.primary.contrastText};
   }
 `;
