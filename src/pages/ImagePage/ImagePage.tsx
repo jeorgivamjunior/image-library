@@ -1,9 +1,8 @@
 import { FC } from 'react';
 
-import { Button, Container, Paper, Typography } from '@mui/material';
+import { Container, Paper, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 
-import { useModal } from '../../hooks';
 import { ImageFormPage } from '../ImageFormPage';
 
 export const ImagePage: FC = () => {
@@ -18,7 +17,7 @@ export const ImagePage: FC = () => {
           </Grid>
           <Grid xs={3}>
             <ImageFormPage>
-              <ImageFormPage.Button />
+              <ImageFormPage.ModalButton />
             </ImageFormPage>
           </Grid>
         </Grid>
