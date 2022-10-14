@@ -3,31 +3,28 @@ import { createContext, FC, PropsWithChildren, useState } from 'react';
 import { Alert, Snackbar } from '@mui/material';
 
 import { ImageProps } from '../../types';
-
-interface ImageContextProps {
-  selectedImage?: ImageProps;
-  imageList: ImageProps[];
-  handleImageChange: (image: ImageProps) => void;
-  handleAddImage: (image: ImageProps) => void;
-  handleEditImage: (image: ImageProps) => void;
-  handleDeleteImage: (id: string | number) => void;
-}
+import { ImageContextProps, MessageProps } from './types';
 
 export const ImageContext = createContext<ImageContextProps>({} as any);
 
 export const ImageContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [selectedImage, setSelectedImage] = useState<ImageProps>();
   const [imageList, setImageList] = useState<ImageProps[]>([
     { id: 1, title: 'test', description: 'oiefoiwefhjiowe' },
     { id: 2, title: 'image', description: '3333' },
   ] as any);
-  const [message, setMessage] = useState();
 
-  const handleImageChange = (image: ImageProps): void => setSelectedImage(image);
+  const [message, setMessage] = useState<MessageProps>({
+    isOpen: false,
+    text: '',
+  });
 
-  const handleAddImage = (image: ImageProps): void => setImageList([...imageList, image]);
+  const handleAddImage = (image: ImageProps): void => {
+    setImageList([...imageList, image]);
 
-  const handleEditImage = (image: ImageProps): void =>
+    toggleMessage('Successfully added');
+  };
+
+  const handleEditImage = (image: ImageProps): void => {
     setImageList([
       ...imageList.map((item) => {
         if (item.id === image.id) {
@@ -38,23 +35,30 @@ export const ImageContextProvider: FC<PropsWithChildren> = ({ children }) => {
       }),
     ]);
 
-  const handleDeleteImage = (id: string | number): void =>
+    toggleMessage('Successfully updated');
+  };
+
+  const handleDeleteImage = (id: string | number): void => {
     setImageList([...imageList.filter((image) => image.id !== id)]);
 
+    toggleMessage('Successfully deleted');
+  };
+
+  const toggleMessage = (text: string): void => setMessage({ text, isOpen: !message.isOpen });
+  const onClose = (): void => setMessage({ ...message, isOpen: !message.isOpen });
+
   return (
-    <ImageContext.Provider
-      value={{ imageList, selectedImage, handleImageChange, handleAddImage, handleEditImage, handleDeleteImage }}
-    >
+    <ImageContext.Provider value={{ imageList, handleAddImage, handleEditImage, handleDeleteImage }}>
       {children}
 
-      {/* <Snackbar
+      <Snackbar
         open={message.isOpen}
-        onClose={toggleMessage}
+        onClose={onClose}
         autoHideDuration={6000}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
-        <Alert severity={message.type}>{message.text}</Alert>
-      </Snackbar> */}
+        <Alert severity="success">{message.text}</Alert>
+      </Snackbar>
     </ImageContext.Provider>
   );
 };
