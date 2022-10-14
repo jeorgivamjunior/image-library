@@ -4,7 +4,7 @@ import { ImageProps } from '../../types';
 
 interface ImageContextProps {
   selectedImage?: ImageProps;
-  imageList?: ImageProps[];
+  imageList: ImageProps[];
   handleImageChange: (image: ImageProps) => void;
   handleAddImage: (image: ImageProps) => void;
   handleEditImage: (image: ImageProps) => void;

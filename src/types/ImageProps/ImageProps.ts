@@ -1,5 +1,6 @@
 export interface ImageProps {
-  file: any;
+  id: string;
   title: string;
   description: string;
+  dataUrl: any;
 }

@@ -1,18 +1,17 @@
 import { FC } from 'react';
 
-import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
+import { ImageProps } from '../../../../types';
 import { ActionGridCell } from '../ActionGridCell';
 import { ImageGridCell } from '../ImageGridCell';
 import { GridContainer } from './styled';
 
-export const GridList: FC = () => {
-  const rows: GridRowsProp = [];
-
+export const GridList: FC<{ imageList: ImageProps[] }> = ({ imageList }) => {
   const columns: GridColDef[] = [
-    { field: 'image', headerName: 'Image', width: 120, renderCell: ImageGridCell, sortable: false },
+    { field: 'dataUrl', headerName: 'Image', width: 120, renderCell: ImageGridCell, sortable: false },
     { field: 'title', headerName: 'title', flex: 1, sortable: false },
-    { field: 'author', headerName: 'Description', flex: 1, sortable: false },
+    { field: 'description', headerName: 'Description', flex: 1, sortable: false },
     { field: 'id', headerName: 'Actions', type: 'actions', renderCell: ActionGridCell, sortable: false },
   ];
 
@@ -23,7 +22,7 @@ export const GridList: FC = () => {
         rowsPerPageOptions={[5]}
         getRowSpacing={() => ({ top: 5, bottom: 5 })}
         getRowHeight={() => 'auto'}
-        rows={rows}
+        rows={imageList}
         columns={columns}
         disableColumnMenu
         disableSelectionOnClick
