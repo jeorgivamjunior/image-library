@@ -46,5 +46,4 @@ describe('GridList file', () => {
     // including the header row
     expect(tableRows).toHaveLength(2);
   });
-  // should render the sixth item on the screen after click on the next page
 });
