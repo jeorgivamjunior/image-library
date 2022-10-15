@@ -2,7 +2,7 @@ import { GridRowModes } from '@mui/x-data-grid';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { ActionGridCell } from '../components/ActionGridCell';
+import { ActionGridCell } from '../components/ActionGridCell/ActionGridCell';
 
 describe('GridList file', () => {
   it('should render the edit and delete button based on the modes modal', () => {

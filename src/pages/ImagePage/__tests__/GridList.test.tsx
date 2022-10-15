@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { GridList } from '../components';
+import { GridList } from '../components/GridList/GridList';
 
 describe('GridList file', () => {
   it('should render a table with 2 items', () => {

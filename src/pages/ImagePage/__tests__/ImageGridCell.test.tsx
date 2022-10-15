@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { ImageGridCell } from '../components/ImageGridCell';
+import { ImageGridCell } from '../components/ImageGridCell/ImageGridCell';
 
 describe('ImageGridCell file', () => {
   it('should render the image', () => {

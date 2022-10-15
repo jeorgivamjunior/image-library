@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { ImageUploader } from '../components';
+import { ImageUploader } from '../components/ImageUploader/ImageUploader';
 
 describe('ImageUploader file', () => {
   it('should render the icon when there is no image', () => {
