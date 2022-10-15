@@ -1,6 +1,6 @@
-#Image Library
+# Image Library
 
-Web application that lists vehicle images.
+Web app to save your images.
 
 [Demo](https://jeorgivamjunior.github.io/image-library)
 
@@ -9,9 +9,9 @@ Web application that lists vehicle images.
 - [✅] Add image (image file, title, description)
 - [✅] View a list images (5 images per page)
 - [✅] Search image by title
-- [✅] Edit title and description
+- [✅] Edit image title and description
 - [✅] Delete a image
-- [✅] Testing
+- [✅] Testing (__ tests __ folders containing test files)
 
 ## Depedencies
 
@@ -25,10 +25,11 @@ Web application that lists vehicle images.
 Architectural decisions to avoid complexity and have clear and understandable code.
 
 - Fucntional components
-- Context/Provider pattern (Child components have access to the parent context data via hooks)
+- Context/Provider pattern
 - Hooks pattern
 - Dialog approach
 - Split components
+- Compound Pattern
 
 ## Available Scripts
 
