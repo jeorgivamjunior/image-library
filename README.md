@@ -11,7 +11,7 @@ Web application that lists vehicle images.
 - [✅] Search image by title
 - [✅] Edit title and description
 - [✅] Delete a image
-- [ ] Testing
+- [✅] Testing
 
 ## Depedencies
 
