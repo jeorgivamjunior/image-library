@@ -25,7 +25,7 @@ export const ImageUploader: FC<{ onFileChange: (dataUrl: string) => void }> = ({
       <label htmlFor="imageInput">
         <Avatar variant="square" src={dataUrl}>
           {!dataUrl && <ImageOutlinedIcon fontSize="large" />}
-          <input id="imageInput" type="file" onChange={handleInputChanges} />
+          <input data-testid="fileInput" id="imageInput" type="file" onChange={handleInputChanges} />
         </Avatar>
       </label>
 
